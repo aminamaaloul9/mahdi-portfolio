@@ -328,8 +328,9 @@
   <section class="contact" id="contact">
     <h2>Contact Me</h2>
     <p>Feel free to reach out for collaborations or inquiries!</p>
-    <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="contact-form"> 
-      <input type="hidden" name="access_key" value="7033cd1a-485d-439c-9a6d-bdabbeeab54a">
+    <form name="contact" method="POST" action="/thank-you.html" data-netlify="true" data-netlify-honeypot="bot-field" id="contact-form" class="contact-form">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
@@ -419,21 +420,16 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') closeVideoModal();
 });
 
-const form = document.querySelector(".contact-form");
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
-  try {
-    const response = await fetch(form.action, { method: "POST", body: formData });
-    if (response.ok) { alert("Message sent successfully!"); form.reset(); }
-    else { alert("Failed to send message."); }
-  } catch (error) { alert("Network error. Try again."); }
-});
+  // Contact form now submits natively to Netlify forms (no JS POST interception)
 </script>
 
 </body>
 
 </html>
+
+
+
+
 
 
 
